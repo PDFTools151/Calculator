@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Percentage Difference | Math Tools</title>
+    <meta name="description" content="Calculate percentages, percentage differences, and other math calculations with our easy-to-use tools.">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-light: #4895ef;
+            --secondary: #3f37c9;
+            --dark: #1b263b;
+            --light: #f8f9fa;
+            --success: #4cc9f0;
+            --warning: #f72585;
+            --border-radius: 12px;
+            --shadow: 0 10px 20px rgba(0,0,0,0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f7ff;
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, var(--primary), var(--primary-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .header p {
+            color: #6c757d;
+            font-size: 1.1rem;
+        }
+        
+        /* Calculator Card */
+        .calculator-card {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: var(--transition);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .calculator-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+        
+        .calculator-card h1 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .calculator-card h1 i {
+            color: var(--primary);
+        }
+        
+        .calculator-description {
+            color: #6c757d;
+            margin-bottom: 1.5rem;
+            font-size: 1rem;
+        }
+        
+        /* Form Styles */
+        .calculator-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .input-group {
+            position: relative;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #e9ecef;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            transition: var(--transition);
+            background-color: #f8f9fa;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-light);
+            background-color: white;
+            box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.2);
+        }
+        
+        .input-group input[readonly] {
+            background-color: #e9ecef;
+            font-weight: bold;
+            color: var(--dark);
+        }
+        
+        /* Button Styles */
+        .btn {
+            background: linear-gradient(to right, var(--primary), var(--primary-light));
+            color: white;
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: var(--border-radius);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .btn:hover {
+            background: linear-gradient(to right, var(--secondary), var(--primary));
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+        
+        .btn:active {
+            transform: translateY(0);
+        }
+        
+        /* Result Styles */
+        .result {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: var(--border-radius);
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--success);
+            display: none;
+        }
+        
+        .result.error {
+            border-left-color: var(--warning);
+            background-color: #fff5f7;
+        }
+        
+        /* Info Section */
+        .info-section {
+            background: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .info-section h2 {
+            font-size: 1.8rem;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .info-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(to right, var(--primary), var(--primary-light));
+            border-radius: 2px;
+        }
+        
+        .info-section h3 {
+            font-size: 1.4rem;
+            color: var(--dark);
+            margin: 1.5rem 0 1rem;
+        }
+        
+        .info-section p, .info-section li {
+            color: #495057;
+            margin-bottom: 0.8rem;
+        }
+        
+        .info-section ul, .info-section dl {
+            margin-left: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .info-section li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .info-section code {
+            background-color: #f1f3f5;
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: monospace;
+            color: #e83e8c;
+        }
+        
+        /* Footer Styles */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            color: white;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(to right, var(--primary), var(--primary-light));
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-section a {
+            color: #adb5bd;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer-section a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #adb5bd;
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .calculator-card, .info-section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main class="container">
+        <header class="header">
+            <h1>Percentage Calculator</h1>
+            <p>Quickly calculate percentages, differences, and changes between values</p>
+        </header>
+        
+        <div class="calculator-card">
+            <h1><i class="fas fa-percentage"></i> Percentage Difference</h1>
+            <p class="calculator-description">Calculate the relative difference between two values as a percentage of their average.</p>
+            
+            <form class="calculator-form" id="differenceForm" aria-label="Percentage difference calculator">
+                <div class="input-group">
+                    <label for="valueA">First Value</label>
+                    <input type="number" id="valueA" placeholder="e.g. 100" aria-required="true">
+                </div>
+                
+                <div class="input-group">
+                    <label for="valueB">Second Value</label>
+                    <input type="number" id="valueB" placeholder="e.g. 120" aria-required="true">
+                </div>
+                
+                <div class="input-group">
+                    <label for="differenceResult">Percentage Difference</label>
+                    <input type="number" id="differenceResult" placeholder="Result will appear here" readonly aria-readonly="true">
+                </div>
+                
+                <button type="button" class="btn" onclick="calculateDifference()" aria-label="Calculate percentage difference">
+                    <i class="fas fa-calculator"></i> Calculate
+                </button>
+                
+                <div class="result" id="differenceText" aria-live="polite"></div>
+            </form>
+        </div>
+        
+        <section class="info-section" aria-labelledby="how-to-heading">
+            <h2 id="how-to-heading"><i class="fas fa-lightbulb"></i> Understanding Percentage Calculations</h2>
+            <p>Percentages are powerful tools for comparing relative differences between values. They standardize comparisons by expressing them as parts per hundred, making it easier to understand proportions and changes.</p>
+            
+            <h3><i class="fas fa-square-root-alt"></i> Key Percentage Formulas</h3>
+            <dl>
+                <dt>Basic Percentage:</dt>
+                <dd><code>(Part / Whole) × 100 = Percentage</code></dd>
+                
+                <dt>Percentage Difference:</dt>
+                <dd><code>(|Value1 - Value2| / ((Value1 + Value2)/2)) × 100</code></dd>
+                
+                <dt>Percentage Change:</dt>
+                <dd><code>((New - Original) / Original) × 100</code></dd>
+            </dl>
+            
+            <h3><i class="fas fa-chart-line"></i> Practical Applications</h3>
+            <ul>
+                <li><strong>Finance:</strong> Calculate interest rates, investment returns, and price changes</li>
+                <li><strong>Academics:</strong> Determine grade improvements or test score differences</li>
+                <li><strong>Business:</strong> Analyze sales growth, profit margins, and market share</li>
+                <li><strong>Science:</strong> Measure experimental results and concentration changes</li>
+            </ul>
+            
+            <div class="tip" style="background-color: #f0f8ff; padding: 1rem; border-radius: var(--border-radius); border-left: 4px solid var(--primary); margin-top: 1.5rem;">
+                <h4 style="margin-bottom: 0.5rem; color: var(--primary);"><i class="fas fa-tip"></i> Pro Tip</h4>
+                <p>When comparing percentage differences, remember that a 50% increase requires only a 33% decrease to return to the original value. This asymmetry is why percentage points matter!</p>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <nav aria-label="Footer navigation">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>Math Tools</h3>
+                        <ul>
+                            <li><a href="#" aria-label="Percentage calculator">Percentage Calculator</a></li>
+                            <li><a href="#" aria-label="Fraction calculator">Fraction Calculator</a></li>
+                            <li><a href="#" aria-label="Algebra calculator">Algebra Calculator</a></li>
+                            <li><a href="#" aria-label="Geometry calculator">Geometry Calculator</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3>Resources</h3>
+                        <ul>
+                            <li><a href="#" aria-label="Math formulas">Math Formulas</a></li>
+                            <li><a href="#" aria-label="Study guides">Study Guides</a></li>
+                            <li><a href="#" aria-label="Practice problems">Practice Problems</a></li>
+                            <li><a href="#" aria-label="Math tricks">Math Tricks</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3>Company</h3>
+                        <ul>
+                            <li><a href="#" aria-label="About us">About Us</a></li>
+                            <li><a href="#" aria-label="Contact information">Contact</a></li>
+                            <li><a href="#" aria-label="Privacy policy">Privacy Policy</a></li>
+                            <li><a href="#" aria-label="Terms of service">Terms of Service</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3>Connect</h3>
+                        <ul>
+                            <li><a href="#" aria-label="Twitter profile"><i class="fab fa-twitter"></i> Twitter</a></li>
+                            <li><a href="#" aria-label="Facebook page"><i class="fab fa-facebook"></i> Facebook</a></li>
+                            <li><a href="#" aria-label="Instagram profile"><i class="fab fa-instagram"></i> Instagram</a></li>
+                            <li><a href="#" aria-label="GitHub repository"><i class="fab fa-github"></i> GitHub</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            
+            <div class="copyright">
+                &copy; <span id="current-year"></span> Math Tools. All rights reserved.
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Set current year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        
+        /**
+         * Calculates the percentage difference between two values
+         * Formula: (|a - b| / ((a + b)/2)) * 100
+         */
+        function calculateDifference() {
+            const valueA = parseFloat(document.getElementById('valueA').value);
+            const valueB = parseFloat(document.getElementById('valueB').value);
+            const resultField = document.getElementById('differenceResult');
+            const resultText = document.getElementById('differenceText');
+            
+            // Clear previous results
+            resultText.textContent = '';
+            resultText.className = 'result';
+            resultText.style.display = 'none';
+            
+            // Validate inputs
+            if (isNaN(valueA) || isNaN(valueB)) {
+                showError(resultText, 'Please enter valid numbers in both fields');
+                resultField.value = '';
+                return;
+            }
+            
+            if (valueA === 0 && valueB === 0) {
+                showError(resultText, 'Both values cannot be zero');
+                resultField.value = '';
+                return;
+            }
+            
+            // Calculate percentage difference
+            const difference = Math.abs(valueA - valueB);
+            const average = (valueA + valueB) / 2;
+            const percentageDifference = (difference / average) * 100;
+            
+            // Display results
+            resultField.value = percentageDifference.toFixed(2);
+            resultText.innerHTML = `
+                <strong>Result:</strong> The percentage difference between ${valueA} and ${valueB} is <strong>${percentageDifference.toFixed(2)}%</strong>.
+                <div style="margin-top: 0.5rem; font-size: 0.9rem; color: #6c757d;">
+                    <i class="fas fa-info-circle"></i> This means the difference is ${percentageDifference.toFixed(2)}% of the average of the two values.
+                </div>
+            `;
+            resultText.style.display = 'block';
+        }
+        
+        function showError(element, message) {
+            element.innerHTML = `<i class="fas fa-exclamation-triangle"></i> ${message}`;
+            element.className = 'result error';
+            element.style.display = 'block';
+        }
+        
+        // Add keyboard support for form submission
+        document.getElementById('differenceForm').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                calculateDifference();
+            }
+        });
+        
+        // Add animation to calculator card on load
+        document.addEventListener('DOMContentLoaded', function() {
+            const calculatorCard = document.querySelector('.calculator-card');
+            calculatorCard.style.opacity = '0';
+            calculatorCard.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                calculatorCard.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                calculatorCard.style.opacity = '1';
+                calculatorCard.style.transform = 'translateY(0)';
+            }, 100);
+        });
+    </script>
+</body>
+</html>
