@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free online scientific calculator with memory functions. Perfect for students, engineers, and professionals.">
+    <meta name="keywords" content="calculator, scientific calculator, online calculator, math tool, web calculator, AdSense calculator">
+    <meta name="author" content="CalcPro">
+    <title>Scientific Web Calculator | Free Online Calculation Tool with Memory Functions</title>
+    
+    <!-- Structured data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Scientific Web Calculator",
+      "description": "Advanced online calculator with memory functions and scientific operations",
+      "url": "https://yourcalculatorwebsite.com",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Web browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧮</text></svg>">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Orbitron:wght@500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #4a6bff;
+            --secondary: #00c853;
+            --accent: #ff3d00;
+            --dark: #1a1a2e;
+            --light: #f8f9ff;
+            --button-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+            color: var(--dark);
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 25px;
+            width: 100%;
+            max-width: 800px;
+        }
+        
+        h1 {
+            font-family: 'Orbitron', sans-serif;
+            color: var(--primary);
+            margin-bottom: 8px;
+            font-size: 2.4rem;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .description {
+            color: #555;
+            margin-bottom: 5px;
+            font-size: 1.05rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .ad-container {
+            width: 100%;
+            max-width: 728px;
+            height: 90px;
+            margin: 25px 0;
+            background-color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+        
+        .calculator-container {
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+            width: 100%;
+            max-width: 340px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+        
+        .calculator-container:hover {
+            transform: translateY(-5px);
+        }
+        
+        .display {
+            background: linear-gradient(to right, #1a1a2e, #16213e);
+            color: white;
+            padding: 25px 20px;
+            text-align: right;
+            font-family: 'Orbitron', sans-serif;
+            position: relative;
+            height: 140px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+        }
+        
+        .previous-operand {
+            font-size: 1.3rem;
+            opacity: 0.7;
+            height: 28px;
+            overflow: hidden;
+            letter-spacing: 1px;
+        }
+        
+        .current-operand {
+            font-size: 2.8rem;
+            margin-top: 12px;
+            word-wrap: break-word;
+            letter-spacing: 2px;
+        }
+        
+        .buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1px;
+            background-color: #e0e0e0;
+        }
+        
+        button {
+            border: none;
+            outline: none;
+            padding: 22px 0;
+            font-size: 1.3rem;
+            cursor: pointer;
+            background-color: white;
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        button::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+        
+        button:focus:not(:active)::after {
+            animation: ripple 0.6s ease-out;
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(20, 20);
+                opacity: 0;
+            }
+        }
+        
+        button:hover {
+            background-color: #f5f5f5;
+            transform: translateY(-2px);
+        }
+        
+        button:active {
+            transform: translateY(0);
+        }
+        
+        .operator {
+            background-color: #f1f5fe;
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        .equals {
+            background: linear-gradient(135deg, var(--primary), #3a56ff);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .equals:hover {
+            background: linear-gradient(135deg, #3a56ff, #2a46ee);
+        }
+        
+        .memory {
+            background-color: #e8f5e9;
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+        
+        .special {
+            background-color: #f5f5f5;
+            color: var(--accent);
+            font-weight: 500;
+        }
+        
+        .wide-btn {
+            grid-column: span 2;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #666;
+            font-size: 0.9rem;
+            width: 100%;
+            max-width: 800px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 10px;
+        }
+        
+        .ad-sidebar {
+            width: 300px;
+            height: 600px;
+            background-color: rgba(255, 255, 255, 0.8);
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            border-radius: 12px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            z-index: 100;
+        }
+        
+        @media (max-width: 1300px) {
+            .ad-sidebar {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .ad-container {
+                height: 60px;
+                margin: 15px 0;
+            }
+            
+            h1 {
+                font-size: 1.9rem;
+            }
+            
+            .description {
+                font-size: 0.95rem;
+            }
+            
+            button {
+                padding: 18px 0;
+                font-size: 1.1rem;
+            }
+            
+            .display {
+                height: 120px;
+                padding: 20px 15px;
+            }
+            
+            .previous-operand {
+                font-size: 1.1rem;
+                height: 24px;
+            }
+            
+            .current-operand {
+                font-size: 2.2rem;
+            }
+            
+            .calculator-container {
+                max-width: 320px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.7rem;
+            }
+            
+            .calculator-container {
+                max-width: 300px;
+            }
+            
+            button {
+                padding: 16px 0;
+                font-size: 1rem;
+            }
+            
+            .display {
+                height: 110px;
+            }
+            
+            .current-operand {
+                font-size: 2rem;
+            }
+        }
+        
+        /* Animation for button presses */
+        @keyframes buttonPress {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.95); }
+            100% { transform: scale(1); }
+        }
+        
+        .button-press {
+            animation: buttonPress 0.2s ease;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Scientific Calculator Pro</h1>
+        <p class="description">Advanced online calculator with memory functions - Perfect for students, engineers, and everyday calculations</p>
+    </header>
+    
+    <!-- Top Ad Banner -->
+    <div class="ad-container">
+        <!-- Replace with your AdSense code -->
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID"></script>
+        <!-- Calculator Top Banner -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+             data-ad-slot="YOUR_TOP_AD_SLOT"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+    
+    <!-- Sidebar Ad (Desktop only) -->
+    <div class="ad-sidebar">
+        <!-- Replace with your AdSense code -->
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID"></script>
+        <!-- Calculator Sidebar -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+             data-ad-slot="YOUR_SIDEBAR_AD_SLOT"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+    
+    <div class="calculator-container">
+        <div class="display">
+            <div class="previous-operand" id="previous-operand"></div>
+            <div class="current-operand" id="current-operand">0</div>
+        </div>
+        <div class="buttons-grid">
+            <button class="special" onclick="pressButton(this); clearAll()">AC</button>
+            <button class="special" onclick="pressButton(this); toggleSign()">±</button>
+            <button class="special" onclick="pressButton(this); randomNumber()">RND</button>
+            <button class="operator" onclick="pressButton(this); appendOperator('÷')">÷</button>
+            <button class="memory" onclick="pressButton(this); memoryRecall()">MR</button>
+            
+            <button onclick="pressButton(this); appendNumber('7')">7</button>
+            <button onclick="pressButton(this); appendNumber('8')">8</button>
+            <button onclick="pressButton(this); appendNumber('9')">9</button>
+            <button class="operator" onclick="pressButton(this); appendOperator('×')">×</button>
+            <button class="memory" onclick="pressButton(this); memoryAdd()">M+</button>
+            
+            <button onclick="pressButton(this); appendNumber('4')">4</button>
+            <button onclick="pressButton(this); appendNumber('5')">5</button>
+            <button onclick="pressButton(this); appendNumber('6')">6</button>
+            <button class="operator" onclick="pressButton(this); appendOperator('–')">–</button>
+            <button class="memory" onclick="pressButton(this); memorySubtract()">M-</button>
+            
+            <button onclick="pressButton(this); appendNumber('1')">1</button>
+            <button onclick="pressButton(this); appendNumber('2')">2</button>
+            <button onclick="pressButton(this); appendNumber('3')">3</button>
+            <button class="operator" onclick="pressButton(this); appendOperator('+')">+</button>
+            <button class="memory" onclick="pressButton(this); showAnswer()">Ans</button>
+            
+            <button class="wide-btn" onclick="pressButton(this); appendNumber('0')">0</button>
+            <button onclick="pressButton(this); appendDecimal()">.</button>
+            <button onclick="pressButton(this); appendExponent()">EXP</button>
+            <button class="operator equals" onclick="pressButton(this); calculate()">=</button>
+            <button class="special" onclick="pressButton(this); backspace()">Back</button>
+        </div>
+    </div>
+    
+    <!-- Bottom Ad Banner -->
+    <div class="ad-container">
+        <!-- Replace with your AdSense code -->
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID"></script>
+        <!-- Calculator Bottom Banner -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+             data-ad-slot="YOUR_BOTTOM_AD_SLOT"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+    
+    <footer>
+        <p>© 2023 Scientific Calculator Pro. All calculations are performed locally in your browser for maximum privacy and performance.</p>
+    </footer>
+    
+    <script>
+        // Calculator state
+        let currentOperand = '0';
+        let previousOperand = '';
+        let operation = undefined;
+        let memoryValue = 0;
+        let lastAnswer = 0;
+        let isNewCalculation = true;
+        
+        // DOM elements
+        const currentOperandElement = document.getElementById('current-operand');
+        const previousOperandElement = document.getElementById('previous-operand');
+        
+        // Update calculator display
+        function updateDisplay() {
+            currentOperandElement.innerText = currentOperand;
+            previousOperandElement.innerText = previousOperand;
+        }
+        
+        // Button press animation
+        function pressButton(button) {
+            button.classList.add('button-press');
+            setTimeout(() => {
+                button.classList.remove('button-press');
+            }, 200);
+        }
+        
+        // Append number to current operand
+        function appendNumber(number) {
+            if (isNewCalculation) {
+                currentOperand = '0';
+                isNewCalculation = false;
+            }
+            
+            if (number === '0' && currentOperand === '0') return;
+            if (currentOperand === '0' && number !== '.') {
+                currentOperand = number;
+            } else {
+                currentOperand += number;
+            }
+            updateDisplay();
+        }
+        
+        // Append decimal point
+        function appendDecimal() {
+            if (isNewCalculation) {
+                currentOperand = '0';
+                isNewCalculation = false;
+            }
+            
+            if (currentOperand.includes('.')) return;
+            if (currentOperand === '') {
+                currentOperand = '0';
+            }
+            currentOperand += '.';
+            updateDisplay();
+        }
+        
+        // Append exponent notation
+        function appendExponent() {
+            if (isNewCalculation) {
+                currentOperand = '0';
+                isNewCalculation = false;
+            }
+            
+            if (currentOperand.includes('e')) return;
+            if (currentOperand === '') {
+                currentOperand = '0';
+            }
+            currentOperand += 'e';
+            updateDisplay();
+        }
+        
+        // Set the operation
+        function appendOperator(operator) {
+            if (currentOperand === '') return;
+            
+            if (previousOperand !== '') {
+                calculate();
+            }
+            
+            operation = operator;
+            previousOperand = `${currentOperand} ${operation}`;
+            currentOperand = '';
+            updateDisplay();
+        }
+        
+        // Perform calculation
+        function calculate() {
+            let computation;
+            const prev = parseFloat(previousOperand);
+            const current = parseFloat(currentOperand);
+            
+            if (isNaN(prev) || isNaN(current)) return;
+            
+            switch (operation) {
+                case '+':
+                    computation = prev + current;
+                    break;
+                case '–':
+                    computation = prev - current;
+                    break;
+                case '×':
+                    computation = prev * current;
+                    break;
+                case '÷':
+                    computation = prev / current;
+                    break;
+                default:
+                    return;
+            }
+            
+            lastAnswer = computation;
+            currentOperand = computation.toString();
+            operation = undefined;
+            previousOperand = '';
+            isNewCalculation = true;
+            updateDisplay();
+        }
+        
+        // Clear all calculator state
+        function clearAll() {
+            currentOperand = '0';
+            previousOperand = '';
+            operation = undefined;
+            isNewCalculation = true;
+            updateDisplay();
+        }
+        
+        // Backspace/delete last character
+        function backspace() {
+            if (currentOperand.length === 1) {
+                currentOperand = '0';
+            } else {
+                currentOperand = currentOperand.slice(0, -1);
+            }
+            updateDisplay();
+        }
+        
+        // Toggle positive/negative sign
+        function toggleSign() {
+            if (currentOperand === '0') return;
+            if (currentOperand.startsWith('-')) {
+                currentOperand = currentOperand.substring(1);
+            } else {
+                currentOperand = '-' + currentOperand;
+            }
+            updateDisplay();
+        }
+        
+        // Generate random number
+        function randomNumber() {
+            currentOperand = (Math.random() * 100).toFixed(6).toString();
+            updateDisplay();
+        }
+        
+        // Memory functions
+        function memoryAdd() {
+            memoryValue += parseFloat(currentOperand) || 0;
+        }
+        
+        function memorySubtract() {
+            memoryValue -= parseFloat(currentOperand) || 0;
+        }
+        
+        function memoryRecall() {
+            currentOperand = memoryValue.toString();
+            isNewCalculation = true;
+            updateDisplay();
+        }
+        
+        // Show last answer
+        function showAnswer() {
+            currentOperand = lastAnswer.toString();
+            isNewCalculation = true;
+            updateDisplay();
+        }
+        
+        // Keyboard support
+        document.addEventListener('keydown', function(event) {
+            const button = document.querySelector(`button:contains('${event.key}')`);
+            if (button) pressButton(button);
+            
+            if (event.key >= '0' && event.key <= '9') {
+                appendNumber(event.key);
+            } else if (event.key === '.') {
+                appendDecimal();
+            } else if (event.key === '+' || event.key === '-' || event.key === '*' || event.key === '/') {
+                let operator;
+                switch (event.key) {
+                    case '*': operator = '×'; break;
+                    case '/': operator = '÷'; break;
+                    case '-': operator = '–'; break;
+                    default: operator = event.key;
+                }
+                appendOperator(operator);
+            } else if (event.key === 'Enter' || event.key === '=') {
+                calculate();
+            } else if (event.key === 'Backspace') {
+                backspace();
+            } else if (event.key === 'Escape') {
+                clearAll();
+            }
+        });
+        
+        // Initialize display
+        updateDisplay();
+    </script>
+</body>
+</html>
