@@ -82,15 +82,19 @@
         }
         
         .logo {
-            font-size: 1.8rem;
             font-weight: 700;
             display: flex;
             align-items: center;
         }
         
-        .logo i {
-            margin-right: 10px;
-            color: var(--accent-color);
+        .logo img {
+            height: 50px;
+            width: auto;
+            transition: var(--transition);
+        }
+        
+        .logo img:hover {
+            opacity: 0.9;
         }
         
         nav ul {
@@ -356,6 +360,11 @@
             .hero h1 {
                 font-size: 2rem;
             }
+            
+            .logo img {
+                height: 40px;
+                margin-bottom: 10px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -370,15 +379,24 @@
             .hero p {
                 font-size: 1rem;
             }
+            
+            .logo img {
+                height: 35px;
+            }
         }
     </style>
 </head>
 <body>
     <header>
-        <div class="container header-content">
-            <div class="logo">
-                <i class="fas fa-calculator" aria-hidden="true"></i>
-                <span>CalcMaster</span>
+  <div class="container header-content">
+    <div class="logo">
+        <!-- Black and White Circle Business Logo -->
+        <img src="images/Black-and-White-Circle-Business-Logo.jpg" 
+             alt="CalcMaster Logo - PDF Tools Financiality"
+             width="150">
+        <span class="sr-only">CalcMaster - PDF Tools Financiality</span>
+    </div>
+</div>
             </div>
             <nav>
                 <ul>
