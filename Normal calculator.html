@@ -11,58 +11,69 @@
   <style>
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #1f1c2c, #928dab);
+      font-family: 'Arial', sans-serif;
+      background: linear-gradient(to right, #2e3b4e, #1d2733);
       display: flex;
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
       color: #fff;
+      padding: 0;
     }
 
     header {
       margin-top: 2rem;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      color: #ffcc00;
     }
 
     .calculator-container {
-      background: #2c2c54;
+      background: #3e5060;
       border-radius: 20px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
       padding: 2rem;
-      max-width: 350px;
+      max-width: 400px;
       width: 90%;
+      margin: 1rem;
     }
 
     .display {
       width: 100%;
       background: #1e272e;
-      color: #0ff;
-      font-size: 2rem;
+      color: #00ffcc;
+      font-size: 2.5rem;
       text-align: right;
-      padding: 1rem;
+      padding: 1.5rem;
       border-radius: 10px;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
+      border: 2px solid #ffcc00;
     }
 
     .buttons {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 10px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
     }
 
     .btn {
-      padding: 15px;
-      background: #3d3d5c;
+      padding: 20px;
+      background: #2d3b44;
       color: #fff;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       border: none;
       border-radius: 10px;
       cursor: pointer;
-      transition: background 0.2s;
+      transition: background 0.3s, transform 0.2s;
     }
 
     .btn:hover {
-      background: #57577a;
+      background: #4c5c68;
+      transform: scale(1.1);
     }
 
     .operator {
@@ -84,10 +95,11 @@
       align-items: center;
       color: #000;
       font-size: 1rem;
+      border-radius: 10px;
     }
 
     footer {
-      margin-top: auto;
+      margin-top: 3rem;
       padding: 1rem;
       text-align: center;
       color: #ccc;
@@ -97,10 +109,10 @@
       text-align: center;
       margin-top: 20px;
       padding: 10px;
-      background: #444;
+      background: #2d3b44;
       border-radius: 10px;
       max-width: 600px;
-      width: 80%;
+      width: 90%;
     }
 
     .calculator-info h2 {
@@ -110,6 +122,17 @@
     .calculator-info p {
       font-size: 1rem;
       color: #ddd;
+    }
+
+    .calculator-info ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .calculator-info li {
+      font-size: 1.1rem;
+      color: #bbb;
+      margin-bottom: 0.5rem;
     }
   </style>
 
@@ -148,7 +171,6 @@
   <div class="calculator-container">
     <div class="display" id="display">0</div>
     <div class="buttons">
-      <button class="btn">0</button>
       <button class="btn">7</button>
       <button class="btn">8</button>
       <button class="btn">9</button>
@@ -158,25 +180,21 @@
       <button class="btn">5</button>
       <button class="btn">6</button>
       <button class="btn operator">–</button>
-      <button class="btn">Ans</button>
 
       <button class="btn">1</button>
       <button class="btn">2</button>
       <button class="btn">3</button>
       <button class="btn operator">×</button>
-      <button class="btn">M+</button>
 
       <button class="btn">0</button>
       <button class="btn">.</button>
       <button class="btn">EXP</button>
       <button class="btn operator">÷</button>
-      <button class="btn">M-</button>
 
       <button class="btn">±</button>
       <button class="btn">RND</button>
       <button class="btn">AC</button>
       <button class="btn operator">=</button>
-      <button class="btn">MR</button>
     </div>
   </div>
 
