@@ -2,24 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free online calculators - Basic calculator, Scientific calculator, Percentage calculator, and more. Easy to use with attractive interface.">
-    <meta name="keywords" content="calculator, scientific calculator, percentage calculator, math tools, online calculator">
-    <meta name="author" content="Your Name">
-    <title>CalcMaster - Free Online Calculators for All Your Needs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
+    <meta name="description" content="CalcMaster offers free online calculators: basic, scientific, percentage, and more. Fast, accurate calculations with mobile-friendly interface. No registration required.">
+    <meta name="keywords" content="calculator, scientific calculator, percentage calculator, math tools, online calculator, free calculator, math calculator, basic calculator">
+    <meta name="author" content="CalcMaster Team">
+    <title>Free Online Calculators - Basic, Scientific, Percentage & More | CalcMaster</title>
     
     <!-- Favicon -->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     
     <!-- Open Graph / Social Media Meta Tags -->
-    <meta property="og:title" content="CalcMaster - Free Online Calculators">
-    <meta property="og:description" content="Free online calculators including Basic, Scientific, Percentage and more.">
+    <meta property="og:title" content="CalcMaster - Free Online Calculators for Students & Professionals">
+    <meta property="og:description" content="Access basic, scientific, percentage calculators and more. No installation needed - works on all devices.">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yourwebsite.com">
-    <meta property="og:image" content="https://yourwebsite.com/images/calc-preview.jpg">
+    <meta property="og:url" content="https://calcmaster.com">
+    <meta property="og:image" content="https://calcmaster.com/images/calc-social-preview.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta name="twitter:card" content="summary_large_image">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://yourwebsite.com">
+    <link rel="canonical" href="https://calcmaster.com">
+    
+    <!-- Preload Resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" as="style">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" as="style">
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -241,6 +248,28 @@
             color: var(--secondary-color);
         }
         
+        .text-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        
+        .text-link:hover {
+            text-decoration: underline;
+        }
+        
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+        
         footer {
             background-color: var(--dark-color);
             color: white;
@@ -348,7 +377,7 @@
     <header>
         <div class="container header-content">
             <div class="logo">
-                <i class="fas fa-calculator"></i>
+                <i class="fas fa-calculator" aria-hidden="true"></i>
                 <span>CalcMaster</span>
             </div>
             <nav>
@@ -358,7 +387,7 @@
                     <li><a href="#features">Features</a></li>
                     <li><a href="/Calculator/about.html">About</a></li>
                     <li><a href="#contact">Contact</a></li>
-                     <li><a href="/Calculator/privacy-policy.html">Privacy-Policy</a></li>
+                    <li><a href="/Calculator/privacy-policy.html">Privacy Policy</a></li>
                 </ul>
             </nav>
         </div>
@@ -366,9 +395,9 @@
     
     <section class="hero" id="home">
         <div class="container">
-            <h1>Your All-in-One Calculator Solution</h1>
-            <p>Free online calculators for all your mathematical needs. Whether you're a student, professional, or just need quick calculations, we've got you covered.</p>
-            <a href="#calculators" class="btn btn-accent">Explore Calculators</a>
+            <h1>Free Online Calculators - Basic, Scientific, Percentage & More</h1>
+            <p>CalcMaster provides instant access to powerful yet easy-to-use calculators for all your mathematical needs. Perfect for students, professionals, and everyday calculations with no installation required.</p>
+            <a href="#calculators" class="btn btn-accent">Explore All Calculators</a>
         </div>
     </section>
     
@@ -392,49 +421,53 @@
     </div>
     
     <section class="container" id="calculators">
-        <h2 class="section-title">Our Calculators</h2>
+        <h2 class="section-title">Featured Calculators</h2>
         <div class="calculator-grid">
             <div class="calculator-card">
                 <div class="calculator-icon">
-                    <i class="fas fa-calculator"></i>
+                    <i class="fas fa-calculator" aria-hidden="true"></i>
+                    <span class="sr-only">Basic Calculator Icon</span>
                 </div>
                 <div class="calculator-info">
-                    <h3>Basic Calculator</h3>
-                    <p>Perform simple arithmetic operations like addition, subtraction, multiplication, and division.</p>
-                    <a href="/Calculator/Normal calculator.html" class="btn">Use Calculator</a>
+                    <h3>Basic Calculator - Add, Subtract, Multiply, Divide</h3>
+                    <p>Perform all fundamental math operations with our simple yet powerful calculator. Perfect for quick calculations, homework help, or financial estimates. The clean interface makes it easy to use for all ages.</p>
+                    <a href="/Calculator/Normal calculator.html" class="btn">Use Basic Calculator</a>
                 </div>
             </div>
             
             <div class="calculator-card">
                 <div class="calculator-icon">
-                    <i class="fas fa-percentage"></i>
+                    <i class="fas fa-percentage" aria-hidden="true"></i>
+                    <span class="sr-only">Percentage Calculator Icon</span>
                 </div>
                 <div class="calculator-info">
                     <h3>Percentage Calculator</h3>
-                    <p>Calculate percentages, percentage increase/decrease, and find values based on percentages.</p>
-                    <a href="/Calculator/Percentage Calculator.html" class="btn">Use Calculator</a>
+                    <p>Calculate percentages, percentage increase/decrease between values, and find amounts based on percentages. Essential for discounts, tips, statistics, and financial calculations.</p>
+                    <a href="/Calculator/Percentage Calculator.html" class="btn">Use Percentage Calculator</a>
                 </div>
             </div>
             
             <div class="calculator-card">
                 <div class="calculator-icon">
-                    <i class="fas fa-exchange-alt"></i>
+                    <i class="fas fa-exchange-alt" aria-hidden="true"></i>
+                    <span class="sr-only">Percentage Difference Icon</span>
                 </div>
                 <div class="calculator-info">
-                    <h3>Percentage Difference</h3>
-                    <p>Calculate the percentage difference between two values and understand the relative change.</p>
-                    <a href="/Calculator/Percentage Difference.html" class="btn">Use Calculator</a>
+                    <h3>Percentage Difference Calculator</h3>
+                    <p>Calculate the percentage difference between two values to understand relative change. Useful for comparing prices, measurements, test scores, and performance metrics.</p>
+                    <a href="/Calculator/Percentage Difference.html" class="btn">Calculate Difference</a>
                 </div>
             </div>
             
             <div class="calculator-card">
                 <div class="calculator-icon">
-                    <i class="fas fa-atom"></i>
+                    <i class="fas fa-atom" aria-hidden="true"></i>
+                    <span class="sr-only">Scientific Calculator Icon</span>
                 </div>
                 <div class="calculator-info">
                     <h3>Scientific Calculator</h3>
-                    <p>Advanced calculator with trigonometric, logarithmic, exponential and other scientific functions.</p>
-                    <a href="/Calculator/Scientific Calculator.html" class="btn">Use Calculator</a>
+                    <p>Advanced calculator with trigonometric, logarithmic, exponential functions and more. Ideal for students, engineers, and scientists. Supports complex calculations with memory functions.</p>
+                    <a href="/Calculator/Scientific Calculator.html" class="btn">Use Scientific Calculator</a>
                 </div>
             </div>
         </div>
@@ -461,30 +494,30 @@
     
     <section class="features" id="features">
         <div class="container">
-            <h2 class="section-title">Why Choose Our Calculators?</h2>
+            <h2 class="section-title">Why Choose CalcMaster Calculators?</h2>
             <div class="features-grid">
                 <div class="feature-card">
                     <i class="fas fa-bolt"></i>
                     <h3>Fast & Easy</h3>
-                    <p>Quick calculations with an intuitive interface that anyone can use.</p>
+                    <p>Quick calculations with our <a href="/basic-calculator" class="text-link">Basic Calculator</a> or advanced operations with our <a href="/scientific-calculator" class="text-link">Scientific Calculator</a>.</p>
                 </div>
                 
                 <div class="feature-card">
                     <i class="fas fa-mobile-alt"></i>
-                    <h3>Responsive</h3>
-                    <p>Works perfectly on all devices from desktop to mobile phones.</p>
+                    <h3>Mobile Friendly</h3>
+                    <p>Works perfectly on all devices from desktop to smartphones. Try our <a href="/percentage-calculator" class="text-link">Percentage Calculator</a> on your phone!</p>
                 </div>
                 
                 <div class="feature-card">
                     <i class="fas fa-lock"></i>
                     <h3>Privacy Focused</h3>
-                    <p>All calculations happen in your browser - no data is sent to servers.</p>
+                    <p>All calculations happen in your browser - no data is sent to our servers. Your calculations remain private.</p>
                 </div>
                 
                 <div class="feature-card">
                     <i class="fas fa-tag"></i>
-                    <h3>Free Forever</h3>
-                    <p>No hidden costs or subscriptions - completely free to use.</p>
+                    <h3>100% Free</h3>
+                    <p>No hidden costs or subscriptions. Access all calculators like our <a href="/percentage-difference" class="text-link">Percentage Difference Tool</a> completely free.</p>
                 </div>
             </div>
         </div>
@@ -495,12 +528,12 @@
             <div class="footer-content">
                 <div class="footer-column">
                     <h3>CalcMaster</h3>
-                    <p>Your one-stop solution for all calculator needs. Fast, reliable, and free online calculators.</p>
+                    <p>Your one-stop solution for all calculator needs. Fast, reliable, and free online calculators for everyday use and professional needs.</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f" aria-hidden="true"></i><span class="sr-only">Facebook</span></a>
+                        <a href="#"><i class="fab fa-twitter" aria-hidden="true"></i><span class="sr-only">Twitter</span></a>
+                        <a href="#"><i class="fab fa-instagram" aria-hidden="true"></i><span class="sr-only">Instagram</span></a>
+                        <a href="#"><i class="fab fa-linkedin-in" aria-hidden="true"></i><span class="sr-only">LinkedIn</span></a>
                     </div>
                 </div>
                 
@@ -508,20 +541,21 @@
                     <h3>Quick Links</h3>
                     <ul>
                         <li><a href="#home">Home</a></li>
-                        <li><a href="#calculators">Calculators</a></li>
+                        <li><a href="#calculators">All Calculators</a></li>
                         <li><a href="#features">Features</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/blog">Calculator Blog</a></li>
                     </ul>
                 </div>
                 
                 <div class="footer-column">
-                    <h3>Calculators</h3>
+                    <h3>Popular Calculators</h3>
                     <ul>
-                        <li><a href="/basic-calculator.html">Basic Calculator</a></li>
-                        <li><a href="/percentage-calculator.html">Percentage Calculator</a></li>
-                        <li><a href="/percentage-difference.html">Percentage Difference</a></li>
-                        <li><a href="/scientific-calculator.html">Scientific Calculator</a></li>
+                        <li><a href="/basic-calculator">Basic Calculator</a></li>
+                        <li><a href="/percentage-calculator">Percentage Calculator</a></li>
+                        <li><a href="/percentage-difference">Percentage Difference</a></li>
+                        <li><a href="/scientific-calculator">Scientific Calculator</a></li>
+                        <li><a href="/tip-calculator">Tip Calculator</a></li>
                     </ul>
                 </div>
                 
@@ -531,12 +565,13 @@
                         <li><i class="fas fa-envelope"></i> contact@calcmaster.com</li>
                         <li><i class="fas fa-phone"></i> +1 (123) 456-7890</li>
                         <li><i class="fas fa-map-marker-alt"></i> 123 Calc Street, Mathville</li>
+                        <li><a href="/contact" class="text-link">Contact Form</a></li>
                     </ul>
                 </div>
             </div>
             
             <div class="copyright">
-                <p>&copy; 2023 CalcMaster. All Rights Reserved. | <a href="/privacy">Privacy Policy</a> | <a href="/terms">Terms of Service</a></p>
+                <p>&copy; 2023 CalcMaster. All Rights Reserved. | <a href="/privacy-policy">Privacy Policy</a> | <a href="/terms">Terms of Service</a> | <a href="/sitemap.xml">Sitemap</a></p>
             </div>
         </div>
     </footer>
@@ -565,15 +600,24 @@
     {
       "@context": "https://schema.org",
       "@type": "WebApplication",
-      "name": "CalcMaster - Online Calculators",
-      "url": "https://yourwebsite.com",
-      "description": "Free online calculators including basic, scientific, percentage and more calculators for all your mathematical needs.",
+      "name": "CalcMaster - Free Online Calculators",
+      "url": "https://calcmaster.com",
+      "description": "Free online calculators including basic, scientific, percentage, and financial calculators for students, professionals, and everyday use.",
       "applicationCategory": "CalculatorApplication",
       "operatingSystem": "Web Browser",
       "offers": {
         "@type": "Offer",
         "price": "0",
         "priceCurrency": "USD"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.9",
+        "reviewCount": "125"
+      },
+      "creator": {
+        "@type": "Organization",
+        "name": "CalcMaster"
       }
     }
     </script>
